@@ -22,13 +22,9 @@ class AlbumViewModel: ObservableObject {
         }
         
         do {
-            // Fetch albums from the service (threading handled by service)
             let fetchedAlbums = try await albumService.fetchAlbums()
-            
-            // Update the albums array
             albums = fetchedAlbums
         } catch {
-            // Handle errors by setting the error message and clearing albums
             errorMessage = error.localizedDescription
             albums = []
         }
