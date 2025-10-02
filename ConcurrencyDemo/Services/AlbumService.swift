@@ -17,7 +17,13 @@ class AlbumService: AlbumServiceProtocol {
         // Perform network request on background thread
         return try await Task.detached { [weak self] in
             guard let self = self else {
-                throw AlbumServiceError.networkError(NSError(domain: "AlbumService", code: -1, userInfo: [NSLocalizedDescriptionKey: "Service deallocated"]))
+                throw AlbumServiceError.networkError(
+                    NSError(
+                        domain: "AlbumService",
+                        code: -1,
+                        userInfo: [NSLocalizedDescriptionKey: "Service deallocated"]
+                    )
+                )
             }
             let url = URL(string: "\(self.baseURL)/albums")!
             return try await self.performRequest(url: url)
